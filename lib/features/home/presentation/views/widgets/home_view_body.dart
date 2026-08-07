@@ -29,7 +29,10 @@ class HomeViewBody extends StatelessWidget {
                      SizedBox(height: 10,),
                       FeatureBookListView(),
                       SizedBox(height: 50,),
-                      Text('Best Saller',style: Styles.textStyle20,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text('Best Saller',style: Styles.textStyle20,),
+                      ),
                       SizedBox(height: 15,),
                      
                   
