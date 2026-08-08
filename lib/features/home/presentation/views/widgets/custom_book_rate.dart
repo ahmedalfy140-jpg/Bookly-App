@@ -3,14 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomBookRate extends StatelessWidget {
-  const CustomBookRate({super.key});
+   const CustomBookRate({super.key,  this.mainAxisAlignment=MainAxisAlignment.start});
+ 
+  final MainAxisAlignment mainAxisAlignment;
+
+ 
 
   @override
   Widget build(BuildContext context, ) {
-    return Row(children: [
-     
+    return Row(
+      mainAxisAlignment:mainAxisAlignment ,
       
-    IconButton(onPressed: (){}, icon:FaIcon(FontAwesomeIcons.solidStar)),
+      children: [
+    IconButton(onPressed: (){}, icon:FaIcon(FontAwesomeIcons.solidStar,size: 14,)),
     // SizedBox(width: 3,),
     Text('4.8',style: Styles.textStyle16),
     SizedBox(width: 3,),

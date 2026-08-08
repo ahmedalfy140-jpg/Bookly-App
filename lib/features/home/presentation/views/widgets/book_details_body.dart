@@ -1,5 +1,10 @@
+import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/book_action.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_details_app_bar.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_rate.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/feature_book_list_view.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/similar_books_list_view.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsBody extends StatelessWidget {
@@ -8,25 +13,56 @@ class BookDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width =MediaQuery.of(context).size.width;
-    return  Scaffold(
-      body: Padding(
+    return  
+
+    CustomScrollView(
+
+      slivers: [
+        
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child:  Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               BookDitailsCustomAppBar(),
             SizedBox(
               height: 20,
             ),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal:width*.2),
+              padding:  EdgeInsets.symmetric(horizontal:width*.260),
               child: CustomBookImage(),
+              
+              
             ),
+            SizedBox(height:30 ,),
+            Text('The Jungle Book',style:Styles.textStyle30),
+            SizedBox(height: 3,),
+             Text('Rudyard Kipling',style:Styles.textStyle18.copyWith(fontStyle: FontStyle.italic,fontWeight: FontWeight.w500)),
+              SizedBox(height: 6,),
+              CustomBookRate(mainAxisAlignment: MainAxisAlignment.center,),
+              BookAction(),
+              Expanded(child: SizedBox(height: 40,)),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text('You can also like',style:TextStyle(fontSize: 16))),
+              SizedBox(height: 10,),
+              
+              SimilarBooksListView(),
+              SizedBox(
+                height: 10,
+              )
             ],
           ),
         ),
-      )
-    );
+      
+    )
+        )
+      ],
+    )
+      ;
   }
 }
 
