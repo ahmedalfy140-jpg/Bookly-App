@@ -28,7 +28,7 @@ class CustomBestSallerListView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 12),
             child: const CustomBookItem(),
           );
         },
