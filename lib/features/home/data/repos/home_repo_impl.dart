@@ -19,16 +19,33 @@ class HomeRepoImpl implements HomeRepo {
        
      }
      return right(books);
-   }   catch (e) {
-    if(e is DioError){
-       return left(ServerFailure.fromDioError(e));
+  //  }   catch (e) {
+  //   if(e is DioException){
+  //      return left(ServerFailure.fromDioError(e));
 
-    }
-    return left(ServerFailure(e.toString()));
+  //   }
+  //   return left(ServerFailure(e.toString()));
     
    
      
+  //  }
    }
+
+  catch (e,s) {
+  print('====================');
+  print(s);
+  print('ERROR: $e');
+
+  if (e is DioException) {
+    print('STATUS CODE: ${e.response?.statusCode}');
+    print('RESPONSE: ${e.response?.data}');
+    print('MESSAGE: ${e.message}');
+  }
+
+  print('====================');
+
+  return left(ServerFailure(e.toString()));
+}
    
   }
 
@@ -44,8 +61,13 @@ class HomeRepoImpl implements HomeRepo {
       }
       return right(books);
     }   catch (e) {
-      return left(ServerFailure(e.toString()));
-      
+    if(e is DioException){
+       return left(ServerFailure.fromDioError(e));
+
+    }
+    return left(ServerFailure(e.toString()));
+    
+   
     }
     
   }

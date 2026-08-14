@@ -7,11 +7,11 @@ class BookService {
   BookService(this.dio);
 
   Future<List<BookModel>> fetchBooks() async {
-    final response = await dio.get(
-      'https://www.googleapis.com/books/v1/volumes',
-      queryParameters: {
-        'q': 'programming',
-      },
+    var response = await dio.get(
+      'https://www.googleapis.com/books/v1/volumes?q=programing&key=AIzaSyCJewSRb7k3o4QyKNoL3aGj9dYWV_vZ95w',
+    //   queryParameters: {
+    //     'q': 'programming',
+    //   },
     );
 
     List books = response.data['items'] ?? [];
