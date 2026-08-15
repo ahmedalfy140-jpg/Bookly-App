@@ -1,18 +1,20 @@
 import 'package:bookly_app/core/errors/faiuler.dart';
 import 'package:bookly_app/core/utils/api_services.dart';
 import 'package:bookly_app/features/home/data/models/book_model.dart';
+import 'package:bookly_app/features/home/data/models/book_services.dart';
 import 'package:bookly_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class HomeRepoImpl implements HomeRepo {
   final ApiServices apiServices;
+  final BookService bookService;
 
-  HomeRepoImpl(this.apiServices);
+  HomeRepoImpl(this.apiServices, this.bookService);
   @override
   Future<Either<Failure, List<BookModel>>> fetchBestSellarBook() async{
    try {
-     var data = await apiServices.get(endpoint: 'programming');
+     var data = await apiServices.get();
      List<BookModel> books =[];
      for (var item in data['items']) {
       books.add(BookModel.fromJson(item));
@@ -53,7 +55,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, List<BookModel>>> fetchFeatureBook()async {
 
     try {
-      var data=await apiServices.get(endpoint: 'flutter');
+      var data=await apiServices.get();
       List<BookModel> books =[];
       for (var item in data['items']) {
         books.add(BookModel.fromJson(item));
@@ -70,5 +72,29 @@ class HomeRepoImpl implements HomeRepo {
    
     }
     
+  }
+
+  @override
+  Future<Either<Failure, List<BookModel>>> fetchBooks() async{
+    try {
+      var data = await bookService.fetchBooks();
+      List<BookModel>books=[];
+      for (var item in data['items']) {
+        books.add(BookModel.fromJson(item));
+        
+      }
+      return right(books);
+    }   catch (e) {
+       if(e is DioException){
+       return left(ServerFailure.fromDioError(e));
+
+    }
+    return left(ServerFailure(e.toString()));
+    
+      
+    }
+   
+
+   
   }
 }

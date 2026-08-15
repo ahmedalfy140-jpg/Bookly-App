@@ -33,7 +33,7 @@ class BookDetailsBody extends StatelessWidget {
             ),
             Padding(
               padding:  EdgeInsets.symmetric(horizontal:width*.260),
-              child: CustomBookImage(),
+              child: CustomBookImage(imageUrl: 'https://books.google.com/books/content?id=s-fJvVOZu0QC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',),
               
               
             ),

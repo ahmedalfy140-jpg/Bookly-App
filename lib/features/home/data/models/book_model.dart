@@ -3,7 +3,7 @@ class BookModel {
   final String title;
   final String? author;
   final String? description;
-  final String? image;
+  final String image;
   final double? rating;
   final int? ratingCount;
 
@@ -12,7 +12,7 @@ class BookModel {
     required this.title,
     this.author,
     this.description,
-    this.image,
+   required this.image,
     this.rating,
     this.ratingCount,
   });
@@ -27,7 +27,7 @@ class BookModel {
       description: json['volumeInfo']['description'] ?? '',
       image: json['volumeInfo']['imageLinks'] != null
           ? json['volumeInfo']['imageLinks']['thumbnail']
-          : null,
+          : "",
       rating: json['volumeInfo']['averageRating']?.toDouble(),
       ratingCount: json['volumeInfo']['ratingsCount'],
     );
