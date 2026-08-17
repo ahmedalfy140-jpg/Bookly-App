@@ -32,7 +32,7 @@ class BooklyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => BestSellarBooksCubit(
             HomeRepoImpl(ApiServices(Dio()), BookService(Dio())),
-          ),
+          )..fetchBestSellarBook(),
         ),
       ],
       child: MaterialApp.router(

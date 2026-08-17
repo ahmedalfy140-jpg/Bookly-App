@@ -6,18 +6,19 @@ class BookModel {
   final String image;
   final double? rating;
   final int? ratingCount;
+  
 
   BookModel({
     required this.id,
     required this.title,
-    this.author,
+    required this.author,
     this.description,
    required this.image,
     this.rating,
     this.ratingCount,
   });
 
-  factory BookModel.fromJson(json) {
+  factory BookModel.fromJson( json) {
     return BookModel(
       id: json['id'] ?? '',
       title: json['volumeInfo']['title'] ?? 'No Title',

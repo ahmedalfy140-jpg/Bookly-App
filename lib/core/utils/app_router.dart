@@ -1,3 +1,4 @@
+import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:bookly_app/features/home/presentation/views/home_view.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/book_details_view.dart';
 import 'package:bookly_app/features/search/presentaion/views/search_view.dart';
@@ -29,7 +30,10 @@ static final GoRouter router = GoRouter(
           GoRoute(
           path:kBookDitails ,
           builder: (BuildContext context, GoRouterState state) {
-            return const BookDetailsView();
+            final book =state.extra as BookModel;
+            return  BookDetailsView(book: book,
+              
+            );
           },
         ),
          GoRoute(

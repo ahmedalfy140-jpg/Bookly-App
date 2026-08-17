@@ -1,33 +1,35 @@
 import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utils/app_router.dart';
-import 'package:bookly_app/core/utils/assets.dart';
+
 import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_rate.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomBookItem extends StatelessWidget {
-  const CustomBookItem({super.key});
+  const CustomBookItem({super.key, required this.book});
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kBookDitails);
+        GoRouter.of(context).push(AppRouter.kBookDitails,extra: book);
       },
       child: SizedBox(
         height: 125,
         child: Row(
           children: [
-            AspectRatio(
-              aspectRatio: 2.5 / 4,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  image: DecorationImage(
-                    image: AssetImage(AssetsData.testImage),
-                  ),
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: AspectRatio(
+                aspectRatio: 2.5 / 4,
+                child: CachedNetworkImage(
+                  fit: BoxFit.fill,
+                  
+                  imageUrl: book.image,placeholder:(context,url)=>Center(child: CircularProgressIndicator()),errorWidget: (context,url,error)=>Icon(Icons.error),)
               ),
             ),
             SizedBox(width: 20),
@@ -40,7 +42,7 @@ class CustomBookItem extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .6,
                       child: Text(
-                        'Harry Potter and the Goblet of Fire',
+                      book.title,
                         style: Styles.textStyle20.copyWith(
                           fontFamily: kGtSectraFine,
                         ),
@@ -49,12 +51,12 @@ class CustomBookItem extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 3),
-                    Text('book Auther', style: Styles.textStyle14),
+                    Text(book.author.toString(), style: Styles.textStyle14,maxLines: 1,overflow:TextOverflow.ellipsis ,),
                     SizedBox(height: 3),
                     Row(
                       children: [
                         Text(
-                          '99.9',
+                          'Free',
                           style: Styles.textStyle20.copyWith(
                             fontWeight: FontWeight.bold,
                           ),

@@ -1,14 +1,18 @@
 import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/book_action.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_details_app_bar.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_rate.dart';
-import 'package:bookly_app/features/home/presentation/views/widgets/feature_book_list_view.dart';
+
 import 'package:bookly_app/features/home/presentation/views/widgets/similar_books_list_view.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsBody extends StatelessWidget {
-  const BookDetailsBody({super.key});
+  
+  final BookModel book;
+
+  const BookDetailsBody({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +37,14 @@ class BookDetailsBody extends StatelessWidget {
             ),
             Padding(
               padding:  EdgeInsets.symmetric(horizontal:width*.260),
-              child: CustomBookImage(imageUrl: 'https://books.google.com/books/content?id=s-fJvVOZu0QC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',),
+              child: CustomBookImage(imageUrl: book.image,),
               
               
             ),
             SizedBox(height:30 ,),
-            Text('The Jungle Book',style:Styles.textStyle30),
+            SizedBox(width:double.infinity , child:  Text(book.title,style:Styles.textStyle30,textAlign: TextAlign.center,)),
             SizedBox(height: 3,),
-             Text('Rudyard Kipling',style:Styles.textStyle18.copyWith(fontStyle: FontStyle.italic,fontWeight: FontWeight.w500)),
+             Text(book.author.toString(),style:Styles.textStyle18.copyWith(fontStyle: FontStyle.italic,fontWeight: FontWeight.w500)),
               SizedBox(height: 6,),
               CustomBookRate(mainAxisAlignment: MainAxisAlignment.center,),
               BookAction(),
