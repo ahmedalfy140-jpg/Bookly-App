@@ -33,18 +33,18 @@ class HomeRepoImpl implements HomeRepo {
   //  }
    }
 
-  catch (e,s) {
-  print('====================');
-  print(s);
-  print('ERROR: $e');
+  catch (e) {
+  // print('====================');
+  // print(s);
+  // print('ERROR: $e');
 
   if (e is DioException) {
-    print('STATUS CODE: ${e.response?.statusCode}');
-    print('RESPONSE: ${e.response?.data}');
-    print('MESSAGE: ${e.message}');
+    // print('STATUS CODE: ${e.response?.statusCode}');
+    // print('RESPONSE: ${e.response?.data}');
+    // print('MESSAGE: ${e.message}');
   }
 
-  print('====================');
+  // print('====================');
 
   return left(ServerFailure(e.toString()));
 }

@@ -7,43 +7,38 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
-  static const kHomView='/homeView';
-   static const kBookDitails='/bookDitails';
-   static const kSearchView='/searchiew';
+  static const kHomView = '/homeView';
+  static const kBookDitails = '/bookDitails';
+  static const kSearchView = '/searchiew';
 
-static final GoRouter router = GoRouter(
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const SplashView();
-      },
-      
-    ),
-    
-        GoRoute(
-          path:kHomView ,
-          builder: (BuildContext context, GoRouterState state) {
-            return const HomeView();
-          },
-        ),
-          GoRoute(
-          path:kBookDitails ,
-          builder: (BuildContext context, GoRouterState state) {
-            final book =state.extra as BookModel;
-            return  BookDetailsView(book: book,
-              
-            );
-          },
-        ),
-         GoRoute(
-          path:kSearchView ,
-          builder: (BuildContext context, GoRouterState state) {
-            return const SearchView();
-          },
-        ),
-      
-  ],
-);
+  static final GoRouter router = GoRouter(
+    routes: <RouteBase>[
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SplashView();
+        },
+      ),
 
+      GoRoute(
+        path: kHomView,
+        builder: (BuildContext context, GoRouterState state) {
+          return const HomeView();
+        },
+      ),
+      GoRoute(
+        path: kBookDitails,
+        builder: (BuildContext context, GoRouterState state) {
+          final book = state.extra as BookModel;
+          return BookDetailsView(book: book);
+        },
+      ),
+      GoRoute(
+        path: kSearchView,
+        builder: (BuildContext context, GoRouterState state) {
+          return SearchView();
+        },
+      ),
+    ],
+  );
 }

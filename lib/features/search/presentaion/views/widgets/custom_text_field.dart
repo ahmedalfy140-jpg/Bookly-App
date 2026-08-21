@@ -1,19 +1,52 @@
+
+import 'package:bookly_app/features/home/presentation/manger/best_sellar_books_cubit/best_sellar_books_cubit.dart';
+import 'package:bookly_app/features/home/presentation/manger/search_view_cubit/search_view_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CustomSearchTextFiled extends StatelessWidget {
-  const CustomSearchTextFiled({super.key});
+class CustomSearchTextFiled extends StatefulWidget {
+   const CustomSearchTextFiled({super.key});
+
+  @override
+  State<CustomSearchTextFiled> createState() => _CustomSearchTextFiledState();
+}
+
+class _CustomSearchTextFiledState extends State<CustomSearchTextFiled> {
+   @override
+  void initState() {
+     super.initState();
+    BlocProvider.of<BestSellarBooksCubit>(context).fetchBestSellarBook();
+
+     
+   
+  }
+  bool isSearch =false;
+  TextEditingController searchController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       child: TextField(
+        onChanged: (value){
+          context.read<SearchBooksCubit>().searchBooks(value);
+
+
+        },
+        
         cursorColor: Colors.white,
         decoration: InputDecoration(
           hintText: 'Search...',
           suffixIcon: IconButton(
-            onPressed: () {},
+            onPressed: () {setState(() {
+                isSearch = !isSearch;
+                if (!isSearch) {
+                  searchController.clear();
+                  context.read<SearchBooksCubit>().searchBooks('');
+                }
+              });},
             icon: FaIcon(FontAwesomeIcons.magnifyingGlass, size: 22),
           ),
           border: OutlineInputBorder(

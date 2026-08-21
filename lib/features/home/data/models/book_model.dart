@@ -18,7 +18,7 @@ class BookModel {
     this.ratingCount,
   });
 
-  factory BookModel.fromJson( json) {
+  factory BookModel.fromJson( dynamic json) {
     return BookModel(
       id: json['id'] ?? '',
       title: json['volumeInfo']['title'] ?? 'No Title',
